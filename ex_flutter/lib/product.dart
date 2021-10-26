@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ex_flutter/const.dart';
+import 'package:ex_flutter/responsive.dart';
 
 class Product extends StatefulWidget {
   final String productTitle;
@@ -47,27 +48,43 @@ class _Product extends State<Product> {
           children: <Widget>[
             Positioned(
                 left: 40,
-                top: _size.height * .1,
+                top: _size.height / 15,
                 right: 40,
-                bottom: _size.height * .05,
+                bottom: _size.height / 30,
                 child: Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(productTitle,
                           style: TextStyle(
-                              fontSize: 36, fontWeight: FontWeight.w600)),
+                              fontSize: (_size.width >= 1400
+                                  ? 36
+                                  : _size.width >= 1100
+                                      ? 28
+                                      : 24),
+                              fontWeight: FontWeight.w600)),
                       Spacer(),
                       Text(description,
                           style: TextStyle(
-                              color: TextDescriptionColor, fontSize: 20)),
+                            color: TextDescriptionColor,
+                            fontSize: (_size.width >= 1400
+                                ? 20
+                                : _size.width >= 1100
+                                    ? 16
+                                    : 14),
+                          )),
                       Spacer(),
                       Text(
                           (_counter == 0
                               ? '\$' + '25'
                               : '\$' + (_counter * price).toString()),
                           style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w500)),
+                              fontSize: (_size.width >= 1400
+                                  ? 30
+                                  : _size.width >= 1100
+                                      ? 26
+                                      : 24),
+                              fontWeight: FontWeight.w500)),
                       Spacer(),
                       Container(
                           width: 180,

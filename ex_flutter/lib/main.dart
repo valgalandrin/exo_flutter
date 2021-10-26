@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ex_flutter/const.dart';
 import 'package:ex_flutter/product.dart';
+import 'package:ex_flutter/responsive.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,14 +48,13 @@ class ProductCard extends StatefulWidget {
 class _ProductCard extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
-    
     Size _size = MediaQuery.of(context).size;
 
     return Container(
         child: Column(
       children: <Widget>[
         Container(
-            height: _size.height * .6,
+            height: _size.height * .65,
             decoration: BoxDecoration(
               color: CardColor,
               borderRadius: BorderRadius.circular(30),
@@ -69,7 +69,7 @@ class _ProductCard extends State<ProductCard> {
                       topLeft: Radius.circular(30),
                       bottomLeft: Radius.circular(30)),
                   child: Image.asset('../assets/images/candle.jpg',
-                      fit: BoxFit.cover, height: _size.height * .6),
+                      fit: BoxFit.cover, height: _size.height * .65),
                 ),
               ),
               Expanded(
