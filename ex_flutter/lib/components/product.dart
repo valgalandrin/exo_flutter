@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ex_flutter/const.dart';
-import 'package:ex_flutter/responsive.dart';
 
 class Product extends StatefulWidget {
   final String productTitle;
   final String description;
-  int price;
+  final int price;
 
   Product({
     Key? key,
@@ -41,19 +40,25 @@ class _Product extends State<Product> {
     String description = widget.description;
 
     return Container(
-        margin: EdgeInsets.only(left: 20),
-        height: MediaQuery.of(context).size.height * .6,
-        width: MediaQuery.of(context).size.width * .25,
+        margin: _size.width <= 650 ? null : EdgeInsets.only(left: 20),
+        height: (_size.width <= 650
+            ? _size.height - (_size.height * .35 + 90)
+            : _size.height * .6),
+        width: (_size.width <= 650 ? _size.width : _size.width * .25),
         child: Stack(
           children: <Widget>[
             Positioned(
                 left: 40,
                 top: _size.height / 15,
-                right: 40,
-                bottom: _size.height / 30,
+                right: 30,
+                bottom: (_size.width >= 650
+                    ? _size.height / 30
+                    : _size.height / 15),
                 child: Container(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: _size.width >= 650
+                        ? CrossAxisAlignment.start
+                        : CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(productTitle,
                           style: TextStyle(
@@ -63,7 +68,7 @@ class _Product extends State<Product> {
                                       ? 28
                                       : 24),
                               fontWeight: FontWeight.w600)),
-                      Spacer(),
+                      _size.width <= 650 ? SizedBox(height: 1) : Spacer(),
                       Text(description,
                           style: TextStyle(
                             color: TextDescriptionColor,
@@ -73,7 +78,7 @@ class _Product extends State<Product> {
                                     ? 16
                                     : 14),
                           )),
-                      Spacer(),
+                      _size.width <= 650 ? SizedBox(height: 10) : Spacer(),
                       Text(
                           (_counter == 0
                               ? '\$' + '25'
@@ -85,10 +90,10 @@ class _Product extends State<Product> {
                                       ? 26
                                       : 24),
                               fontWeight: FontWeight.w500)),
-                      Spacer(),
+                      _size.width <= 650 ? SizedBox(height: 10) : Spacer(),
                       Container(
-                          width: 180,
-                          height: 50,
+                          width: (_size.width <= 800 ? 150 : 180),
+                          height: (_size.width <= 800 ? 40 : 50),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
@@ -101,19 +106,24 @@ class _Product extends State<Product> {
                                   child: Text('-',
                                       style: TextStyle(
                                           color: ButtonColor,
-                                          fontSize: 26,
+                                          fontSize:
+                                              (_size.width <= 800 ? 20 : 26),
                                           fontWeight: FontWeight.w500))),
-                              Text('$_counter', style: TextStyle(fontSize: 20)),
+                              Text('$_counter',
+                                  style: TextStyle(
+                                      fontSize:
+                                          (_size.width <= 800 ? 16 : 20))),
                               TextButton(
                                   onPressed: _incrementCounter,
                                   child: Text('+',
                                       style: TextStyle(
                                           color: ButtonColor,
-                                          fontSize: 26,
+                                          fontSize:
+                                              (_size.width <= 800 ? 20 : 26),
                                           fontWeight: FontWeight.w500)))
                             ],
                           )),
-                      Spacer(),
+                      _size.width <= 650 ? SizedBox(height: 20) : Spacer(),
                       ButtonAddToCart()
                     ],
                   ),
@@ -130,9 +140,10 @@ class ButtonAddToCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size _size = MediaQuery.of(context).size;
     return Container(
-      width: 260,
-      height: 70,
+      width: (_size.width <= 800 ? 220 : 260),
+      height: (_size.width <= 800 ? 50 : 70),
       child: TextButton(
           onPressed: null,
           style: ButtonStyle(
@@ -141,7 +152,9 @@ class ButtonAddToCart extends StatelessWidget {
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)))),
           child: Text('Add to cart',
-              style: TextStyle(color: Colors.white, fontSize: 26))),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: (_size.width <= 800 ? 20 : 26)))),
     );
   }
 }
