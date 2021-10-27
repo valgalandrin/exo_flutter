@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:ex_flutter/const.dart';
 
-class Navbar extends StatelessWidget {
+class Navbar extends StatefulWidget {
+  Navbar({Key? key}) : super(key: key);
+
+  @override
+  _Navbar createState() => _Navbar();
+}
+
+class _Navbar extends State<Navbar> {
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      data.inCart;
+      print(data.inCart);
+    });
+
     Size _size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: _size.width * .15),
@@ -22,10 +34,11 @@ class Navbar extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: null,
-            icon: Image.asset('../assets/images/caddie.png'),
-            iconSize: 40,
-          )
+              onPressed: null,
+              icon: data.inCart == true
+                  ? Image.asset('../assets/images/caddie_full.png')
+                  : Image.asset('../assets/images/caddie.png'),
+              iconSize: 40)
         ],
         backgroundColor: BackgroundColor,
       ),

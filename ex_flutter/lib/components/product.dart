@@ -133,10 +133,23 @@ class _Product extends State<Product> {
   }
 }
 
-class ButtonAddToCart extends StatelessWidget {
+class ButtonAddToCart extends StatefulWidget {
   const ButtonAddToCart({
     Key? key,
   }) : super(key: key);
+
+  @override
+  _ButtonAddToCart createState() => _ButtonAddToCart();
+}
+
+class _ButtonAddToCart extends State<ButtonAddToCart> {
+  void inCart() {
+    setState(() {
+      data.inCart = true;
+      print(data.inCart);
+      return;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +158,7 @@ class ButtonAddToCart extends StatelessWidget {
       width: (_size.width <= 800 ? 220 : 260),
       height: (_size.width <= 800 ? 50 : 70),
       child: TextButton(
-          onPressed: null,
+          onPressed: inCart,
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(ButtonColor),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
